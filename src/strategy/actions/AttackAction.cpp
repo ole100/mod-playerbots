@@ -53,6 +53,12 @@ bool AttackMyTargetAction::Execute(Event event)
 
 bool AttackAction::Attack(Unit* target, bool with_pet /*true*/)
 {
+    Unit* oldTarget = context->GetValue<Unit*>("current target")->Get();
+    bool melee = bot->IsWithinMeleeRange(target) || botAI->IsMelee(bot);
+
+    if (oldTarget == target && botAI->GetState() == BOT_STATE_COMBAT && bot->GetVictim() == target && (bot->HasUnitState(UNIT_STATE_MELEE_ATTACKING) == melee))
+        return false;
+    
     if (bot->GetMotionMaster()->GetCurrentMovementGeneratorType() == FLIGHT_MOTION_TYPE ||
         bot->HasUnitState(UNIT_STATE_IN_FLIGHT))
     {
@@ -131,11 +137,7 @@ bool AttackAction::Attack(Unit* target, bool with_pet /*true*/)
     ObjectGuid guid = target->GetGUID();
     bot->SetSelection(target->GetGUID());
 
-    Unit* oldTarget = context->GetValue<Unit*>("current target")->Get();
-    bool melee = bot->IsWithinMeleeRange(target) || botAI->IsMelee(bot);
-
-    if (oldTarget == target && botAI->GetState() == BOT_STATE_COMBAT && bot->GetVictim() == target && (bot->HasUnitState(UNIT_STATE_MELEE_ATTACKING) == melee))
-        return false;
+    
 
     context->GetValue<Unit*>("old target")->Set(oldTarget);
 

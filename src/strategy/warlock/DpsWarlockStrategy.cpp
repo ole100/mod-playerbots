@@ -57,15 +57,7 @@ void DpsWarlockStrategy::InitTriggers(std::vector<TriggerNode*>& triggers)
 {
     GenericWarlockStrategy::InitTriggers(triggers);
 
-    triggers.push_back(
-        new TriggerNode("backlash", NextAction::array(0, new NextAction("shadow bolt", 20.0f), nullptr)));
-
     triggers.push_back(new TriggerNode("haunt", NextAction::array(0, new NextAction("haunt", 26.0f), NULL)));
-
-    triggers.push_back(
-        new TriggerNode("shadow trance", NextAction::array(0, new NextAction("shadow bolt", 15.0f), NULL)));
-
-    triggers.push_back(new TriggerNode("backlash", NextAction::array(0, new NextAction("shadow bolt", 15.0f), NULL)));
 
     triggers.push_back(new TriggerNode("molten core", NextAction::array(0, new NextAction("incinerate", 15.0f), NULL)));
 
@@ -88,13 +80,13 @@ void DpsAoeWarlockStrategy::InitTriggers(std::vector<TriggerNode*>& triggers)
                                                         new NextAction("seed of corruption on attacker", 32.0f),
                                                         new NextAction("rain of fire", 31.0f), nullptr)));
     triggers.push_back(new TriggerNode("corruption on attacker",
-                                       NextAction::array(0, new NextAction("corruption on attacker", 27.0f), nullptr)));
+                                       NextAction::array(0, new NextAction("corruption on attacker", 19.0f), nullptr)));
     triggers.push_back(
         new TriggerNode("unstable affliction on attacker",
-                        NextAction::array(0, new NextAction("unstable affliction on attacker", 26.0f), NULL)));
+                        NextAction::array(0, new NextAction("unstable affliction on attacker", 18.0f), NULL)));
     triggers.push_back(
         new TriggerNode("curse of agony on attacker",
-                        NextAction::array(0, new NextAction("curse of agony on attacker", 25.0f), nullptr)));
+                        NextAction::array(0, new NextAction("curse of agony on attacker", 17.0f), nullptr)));
 }
 
 void DpsWarlockDebuffStrategy::InitTriggers(std::vector<TriggerNode*>& triggers)
