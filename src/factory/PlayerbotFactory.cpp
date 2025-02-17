@@ -1631,7 +1631,7 @@ void PlayerbotFactory::InitEquipment(bool incremental, bool second_chance)
                         if (!proto)
                             continue;
 
-                        if (gearScoreLimit != 0 &&
+                        if (desiredQuality > ITEM_QUALITY_NORMAL && gearScoreLimit != 0 &&
                             CalcMixedGearScore(proto->ItemLevel, proto->Quality) > gearScoreLimit)
                         {
                             continue;

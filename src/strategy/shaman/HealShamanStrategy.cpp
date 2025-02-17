@@ -48,9 +48,9 @@ void HealShamanStrategy::InitTriggers(std::vector<TriggerNode*>& triggers)
     // NextAction("earthliving weapon", 22.0f), nullptr)));
     triggers.push_back(new TriggerNode("main hand weapon no imbue",
                                        NextAction::array(0, new NextAction("earthliving weapon", 22.0f), nullptr)));
-    triggers.push_back(new TriggerNode(
-        "group heal setting",
-        NextAction::array(0, new NextAction("riptide on party", 27.0f), new NextAction("chain heal on party", 26.0f), NULL)));
+    triggers.push_back(
+        new TriggerNode("group heal setting", NextAction::array(0, new NextAction("riptide on party", 27.0f),
+                                                                new NextAction("chain heal on party", 26.0f), NULL)));
 
     triggers.push_back(new TriggerNode(
         "party member critical health",
@@ -72,15 +72,15 @@ void HealShamanStrategy::InitTriggers(std::vector<TriggerNode*>& triggers)
                         NextAction::array(0, new NextAction("riptide on party", 12.0f),
                                           new NextAction("lesser healing wave on party", 11.0f), nullptr)));
 
-    triggers.push_back(
-        new TriggerNode("party member cleanse spirit poison",
-                        NextAction::array(0, new NextAction("cleanse spirit poison on party", ACTION_DISPEL + 2),
-                                          new NextAction("cleansing totem", ACTION_DISPEL + 2), NULL)));
+    triggers.push_back(new TriggerNode(
+        "party member cleanse spirit poison",
+        NextAction::array(0, new NextAction("cleansing totem", ACTION_DISPEL + 3),
+                          new NextAction("cleanse spirit poison on party", ACTION_DISPEL + 2), nullptr)));
 
     triggers.push_back(
         new TriggerNode("party member cleanse spirit disease",
-                        NextAction::array(0, new NextAction("cleanse spirit disease on party", ACTION_DISPEL + 2),
-                                          new NextAction("cleansing totem", ACTION_DISPEL + 1), NULL)));
+                        NextAction::array(0, new NextAction("cleansing totem", ACTION_DISPEL + 1),
+                                          new NextAction("cleanse spirit disease on party", ACTION_DISPEL), nullptr)));
 
     triggers.push_back(new TriggerNode(
         "party member cleanse spirit curse",
@@ -108,7 +108,7 @@ void HealShamanStrategy::InitTriggers(std::vector<TriggerNode*>& triggers)
         new TriggerNode("no fire totem", NextAction::array(0, new NextAction("flametongue totem", 7.0f),
                                                            new NextAction("searing totem", 6.0f), nullptr)));
     triggers.push_back(new TriggerNode("fire elemental totem",
-                                       NextAction::array(0, new NextAction("fire elemental totem", 32.0f), nullptr)));                                                       
+                                       NextAction::array(0, new NextAction("fire elemental totem", 32.0f), nullptr)));
     triggers.push_back(new TriggerNode(
         "party member to heal out of spell range",
         NextAction::array(0, new NextAction("reach party member to heal", ACTION_CRITICAL_HEAL + 1), nullptr)));
