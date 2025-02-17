@@ -452,13 +452,13 @@ void RandomPlayerbotFactory::CreateRandomBots()
             {
                 Field* fields = results->Fetch();
                 uint32 accId = fields[0].Get<uint32>();
-                LOG_INFO("playerbots", "Deleting account accID: {}({})...", accId, ++deletion_count);
+                LOG_DEBUG("playerbots", "Deleting account accID: {}({})...", accId, ++deletion_count);
                 AccountMgr::DeleteAccount(accId);
             } while (results->NextRow());
         }
 
-        PlayerbotsDatabase.Execute(PlayerbotsDatabase.GetPreparedStatement(PLAYERBOTS_DEL_RANDOM_BOTS));
         uint32 timer = getMSTime();
+        PlayerbotsDatabase.Execute(PlayerbotsDatabase.GetPreparedStatement(PLAYERBOTS_DEL_RANDOM_BOTS));
         while (LoginDatabase.QueueSize())
         {
             std::this_thread::sleep_for(1s);
@@ -476,7 +476,8 @@ void RandomPlayerbotFactory::CreateRandomBots()
 
     // Calculates the total number of required accounts.
     uint32 totalAccountCount = CalculateTotalAccountCount();
-
+    uint32 timer = getMSTime();
+    
     for (uint32 accountNumber = 0; accountNumber < totalAccountCount; ++accountNumber)
     {
         std::ostringstream out;
@@ -506,12 +507,11 @@ void RandomPlayerbotFactory::CreateRandomBots()
 
         LOG_DEBUG("playerbots", "Account {} created for random bots", accountName.c_str());
     }
-
     if (account_creation)
     {
         LOG_INFO("playerbots", "Waiting for {} accounts loading into database ({} queries)...", account_creation, LoginDatabase.QueueSize());
         /* wait for async accounts create to make character create correctly */
-        uint32 timer = getMSTime();
+        
         while (LoginDatabase.QueueSize())
         {
             std::this_thread::sleep_for(1s);
@@ -524,7 +524,7 @@ void RandomPlayerbotFactory::CreateRandomBots()
     std::vector<std::pair<Player*, uint32>> playerBots;
     std::vector<WorldSession*> sessionBots;
     int bot_creation = 0;
-
+    timer = getMSTime();
     bool nameCached = false;
     for (uint32 accountNumber = 0; accountNumber < totalAccountCount; ++accountNumber)
     {
@@ -621,7 +621,6 @@ void RandomPlayerbotFactory::CreateRandomBots()
     {
         LOG_INFO("playerbots", "Waiting for {} characters loading into database ({} queries)...", bot_creation, CharacterDatabase.QueueSize());
         /* wait for characters load into database, or characters will fail to loggin */
-        uint32 timer = getMSTime();
         while (CharacterDatabase.QueueSize())
         {
             std::this_thread::sleep_for(1s);
