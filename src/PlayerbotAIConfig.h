@@ -57,7 +57,7 @@ public:
     bool enabled;
     bool allowAccountBots, allowGuildBots;
     bool randomBotGuildNearby, randomBotInvitePlayer, inviteChat;
-    uint32 globalCoolDown, reactDelay, maxWaitForMove, disableMoveSplinePath, maxMovementSearchTime,
+    uint32 globalCoolDown, reactDelay, maxWaitForMove, disableMoveSplinePath, maxMovementSearchTime, expireActionTime,
         dispelAuraDuration, passiveDelay, repeatDelay, errorDelay, rpgDelay, sitDelay, returnDelay, lootDelay;
     bool dynamicReactDelay;
     float sightDistance, spellDistance, reactDistance, grindDistance, lootDistance, shootDistance, fleeDistance,
@@ -95,7 +95,7 @@ public:
     uint32 minRandomBotChangeStrategyTime, maxRandomBotChangeStrategyTime;
     uint32 minRandomBotReviveTime, maxRandomBotReviveTime;
     uint32 minRandomBotTeleportInterval, maxRandomBotTeleportInterval;
-    uint32 randomBotInWorldWithRotationDisabled;
+    uint32 permanantlyInWorldTime;
     uint32 minRandomBotPvpTime, maxRandomBotPvpTime;
     uint32 randomBotsPerInterval;
     uint32 minRandomBotsPriceChangeInterval, maxRandomBotsPriceChangeInterval;
@@ -235,8 +235,8 @@ public:
     uint32 limitEnchantExpansion;
     uint32 limitGearExpansion;
     uint32 randombotStartingLevel;
-    bool enableRotation;
-    uint32 rotationPoolSize;
+    bool enablePeriodicOnlineOffline;
+    float periodicOnlineOfflineRatio;
     bool gearscorecheck;
     bool randomBotPreQuests;
 
@@ -275,7 +275,7 @@ public:
     bool randomBotShowCloak;
     bool randomBotFixedLevel;
     bool disableRandomLevels;
-    uint32 playerbotsXPrate;
+    float playerbotsXPrate;
     uint32 randomBotAllianceRatio;
     uint32 randomBotHordeRatio;
     bool disableDeathKnightLogin;
@@ -313,6 +313,7 @@ public:
     bool autoLearnQuestSpells;
     bool autoTeleportForLevel;
     bool randomBotGroupNearby;
+    bool enableRandomBotTrading;
     uint32 tweakValue;  // Debugging config
 
     uint32 randomBotArenaTeamCount;
